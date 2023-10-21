@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // private variables
-    [SerializeField] int playerSpeed = 5;
     Vector2 movement;
     Rigidbody2D rb;
     Animator animator;
@@ -16,26 +14,39 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    void Update()
+    {
+        if (PlayerManager.Instance.health <= 0) animator.SetBool("isDead", true);
+    }
+
     void FixedUpdate()
     {
-        rb.AddForce(movement * playerSpeed);
+        int pSpeed = PlayerManager.Instance.speed;
+        rb.AddForce(movement * pSpeed);
     }
-    
+
     void OnMovement(InputValue value)
     {   // Unity Input System function for movement - called from PlayerInput component
 
         movement = value.Get<Vector2>();
 
-        // if the player is moving (movement value is not zero), set the animator parameters
-        if (movement != Vector2.zero)   
-        { 
-            animator.SetFloat("X", movement.x);
-            animator.SetFloat("Y", movement.y);
-
-            animator.SetBool("isWalking", true);
-        } else
+        if (!animator.GetBool("isDead"))
         {
-            animator.SetBool("isWalking", false);
+            // if the player is moving (movement value is not zero), set the animator parameters
+            if (movement != Vector2.zero)
+            {
+                animator.SetFloat("X", movement.x);
+                animator.SetFloat("Y", movement.y);
+
+                animator.SetBool("isWalking", true);
+            } else
+            {
+                animator.SetBool("isWalking", false);
+            }
+        }
+        else
+        {
+            // what happens if player is dead
         }
     }
 }
