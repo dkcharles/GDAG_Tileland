@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &265353013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5135938e6aba39b4ca8fcb033765af5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpeed: 20
+  movement: {x: 0, y: 0}
 --- !u!114 &438020054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8657,8 +8659,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0047500134, y: -0.00034999847, z: 0}
-    m_Extent: {x: 2.56315, y: 2.56635, z: 0}
+    m_Center: {x: -0.0023499727, y: -0.000100016594, z: 0}
+    m_Extent: {x: 2.5616498, y: 2.5628, z: 0}
   m_PointLightInnerAngle: 42.37
   m_PointLightOuterAngle: 117.52
   m_PointLightInnerRadius: 1.23
@@ -8739,8 +8741,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00045001507, y: 0.002550006, z: 0}
-    m_Extent: {x: 2.56915, y: 2.5630498, z: 0}
+    m_Center: {x: -0.00020003319, y: 0.0020999908, z: 0}
+    m_Extent: {x: 2.5679, y: 2.5639, z: 0}
   m_PointLightInnerAngle: 42.37
   m_PointLightOuterAngle: 117.52
   m_PointLightInnerRadius: 1.23
