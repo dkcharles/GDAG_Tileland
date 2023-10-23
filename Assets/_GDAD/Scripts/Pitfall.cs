@@ -10,6 +10,8 @@ public class Pitfall : MonoBehaviour
         if (collision.tag == "Player")
         {
             animator.SetBool("isDead", true);
+
+            // do some particle effects?
         }
     }
 
