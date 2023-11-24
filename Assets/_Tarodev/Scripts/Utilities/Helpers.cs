@@ -12,7 +12,9 @@ public static class Helpers
     /// transform.DestroyChildren();
     /// </code>
     /// </summary>
+
     public static void DestroyChildren(this Transform t) {
         foreach (Transform child in t) Object.Destroy(child.gameObject);
     }
 }
+
