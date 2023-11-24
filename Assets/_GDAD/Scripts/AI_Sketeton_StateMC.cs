@@ -11,7 +11,7 @@ public class AI_Sketeton_StateMC : MonoBehaviour
     
     const string _isSad = "isSad";
     const string _seePlayer = "PlayerVisible";
-    void Start()
+    void Awake()
     {
         
     }
@@ -34,5 +34,10 @@ public class AI_Sketeton_StateMC : MonoBehaviour
         {
             anim.SetBool(_seePlayer, false);
         }
+    }
+
+    public bool CanSeePlayer()
+    {
+        return anim.GetBool(_seePlayer);
     }
 }
