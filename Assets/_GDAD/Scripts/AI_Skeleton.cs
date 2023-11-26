@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class AI_Skeleton : MonoBehaviour
 {
-    [SerializeField] Transform _target;
-    NavMeshAgent _navMeshAgent;
+    public Animator _anim;
 
-    AI_Sketeton_StateMC _stateMachine;
+    [SerializeField] private Transform _target;
+    [SerializeField] [Range(0.5f, 2.5f)] private float _attackDistance;
+    private NavMeshAgent _navMeshAgent;
+    private AI_Skeleton_StateMC _stateMachine;
+    private float _previousXpos;
+
+    private const string _iswalking = "isWalking";
+    private const string _isAttacking = "isAttacking";
 
     private void Awake()
     {
-        _stateMachine = GetComponentInChildren<AI_Sketeton_StateMC>();
+        _stateMachine = GetComponentInChildren<AI_Skeleton_StateMC>();
+        _anim = GetComponent<Animator>();
     }
 
 
@@ -21,17 +30,49 @@ public class AI_Skeleton : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.updateRotation = false;
         _navMeshAgent.updateUpAxis = false;
+        _previousXpos = transform.position.x;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (IsMovingRight()) GetComponent<SpriteRenderer>().flipX = false;
+        else GetComponent<SpriteRenderer>().flipX = true;
+
         Debug.Log("Can see player: " + _stateMachine.CanSeePlayer());
         if (_stateMachine.CanSeePlayer())
         {
-            _navMeshAgent.isStopped = false;
-            _navMeshAgent.SetDestination(_target.position);
+            if (AttackDistCheck())
+            {
+                _anim.SetBool(_isAttacking, true);
+                _navMeshAgent.isStopped = true;
+                _anim.SetBool(_iswalking, false);
+            }
+            else
+            {
+                _anim.SetBool(_isAttacking, false);
+                _navMeshAgent.isStopped = false;
+                _anim.SetBool(_iswalking, true);
+                _navMeshAgent.SetDestination(_target.position);
+            }
+    
         }
-        else _navMeshAgent.isStopped = true;
+        else
+        {
+            _navMeshAgent.isStopped = true;
+            _anim.SetBool(_iswalking, false);
+        }
+        _previousXpos = transform.position.x;
+    }
+
+    // check direction of movement in the x axis
+    public bool IsMovingRight()
+    {
+        return transform.position.x >= _previousXpos;
+    }
+
+    public bool AttackDistCheck()
+    {
+        return ((_target.position - transform.position).magnitude < _attackDistance);
     }
 }
