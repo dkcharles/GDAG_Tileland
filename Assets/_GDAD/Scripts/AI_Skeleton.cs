@@ -39,10 +39,14 @@ public class AI_Skeleton : MonoBehaviour
         if (IsMovingRight()) GetComponent<SpriteRenderer>().flipX = false;
         else GetComponent<SpriteRenderer>().flipX = true;
 
+        // check _stateMachine animation state
+        AnimatorStateInfo stateInfo = _stateMachine.anim.GetCurrentAnimatorStateInfo(0);
+
         Debug.Log("Can see player: " + _stateMachine.CanSeePlayer());
         if (_stateMachine.CanSeePlayer())
         {
-            if (AttackDistCheck())
+            bool isAngry = stateInfo.IsName("Angry");
+            if (AttackDistCheck() && isAngry)
             {
                 _anim.SetBool(_isAttacking, true);
                 _navMeshAgent.isStopped = true;

@@ -7,7 +7,7 @@ public class AI_Skeleton_StateMC : MonoBehaviour
     [SerializeField] private Transform _player;
     [SerializeField] private float _playerDistance = Mathf.Infinity;
     [SerializeField] private float _distanceToPlayerThreshold = 5f;
-    [SerializeField] private Animator anim;
+    public Animator anim;
     [SerializeField] private float _turnSadChance = 0.001f;
     private const string _isSad = "isSad";
     private const string _seePlayer = "PlayerVisible";
