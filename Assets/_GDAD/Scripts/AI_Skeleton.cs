@@ -39,7 +39,7 @@ public class AI_Skeleton : MonoBehaviour
         if (IsMovingRight()) GetComponent<SpriteRenderer>().flipX = false;
         else GetComponent<SpriteRenderer>().flipX = true;
 
-        // check _stateMachine animation state
+        // check current _stateMachine animation state
         AnimatorStateInfo stateInfo = _stateMachine.anim.GetCurrentAnimatorStateInfo(0);
 
         Debug.Log("Can see player: " + _stateMachine.CanSeePlayer());
